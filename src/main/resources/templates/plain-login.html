@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('images/pexels-sanket-barik-8020071.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 100px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #f7f7f7;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #6c757d;
+            outline: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            background-color: #3897f0;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-login:hover {
+            background-color: #1877c9;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .logout-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logout-button {
+            padding: 10px 30px;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <div class="login-container">
+        <h3>Portal Login Page</h3>
+
+        <form action="#" method="POST" th:action="@{/authenticateTheUser}">
+            <!-- Check for logout -->
+            <div th:if="${param.logout}">
+                <div class="alert alert-success col-xs-offset-1 col-xs-10">
+                    You have been logged out.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username"></label><input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password"></label><input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                                                     required>
+            </div>
+
+            <button type="submit" class="btn btn-login">Login</button>
+            <p class="error-message" th:if="${param.error}">Sorry! you entered Invalid username/password</p>
+        </form>
+    </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
