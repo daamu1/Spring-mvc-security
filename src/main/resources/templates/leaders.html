@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Console</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe6e6;
+        }
+
+        header {
+            background-color: #405de6;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            line-height: 1.5;
+            font-family: Arial, sans-serif;
+        }
+
+        .secret-trip {
+            display: none;
+        }
+
+        .manager-console {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .manager-console input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+        }
+
+        .manager-console textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+        }
+
+        .manager-console button {
+            padding: 10px 20px;
+            background-color: #405de6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+
+        .manager-console button:hover {
+            background-color: #1a3d99;
+        }
+
+        .announcement {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .announcement h3 {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .announcement p {
+            line-height: 1.5;
+            font-family: Arial, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>Manager Console</h2>
+</header>
+
+<main>
+    <div class="secret-trip">
+        <p>
+            See you in Brazil ... for our annual Leadership retreat!
+            <br>
+            Keep this trip a secret, don't tell the regular employees LOL :-)
+        </p>
+    </div>
+
+    <div class="manager-console">
+        <h3>Post Announcement</h3>
+        <input type="text" placeholder="Title">
+        <textarea placeholder="Announcement"></textarea>
+        <button>Post</button>
+    </div>
+
+    <hr>
+
+    <div id="announcements-container">
+        <div th:each="announcement : ${announcements}" class="announcement">
+            <h3 th:text="${announcement.title}"></h3>
+            <p th:text="${announcement.message}"></p>
+        </div>
+    </div>
+
+    <a href="/">Back to Home Page</a>
+</main>
+
+<script th:inline="javascript">
+    const secretTrip = document.querySelector('.secret-trip');
+    const managerConsole = document.querySelector('.manager-console');
+    const announcementsContainer = document.getElementById('announcements-container');
+
+    // Show the secret trip information after 3 seconds
+    setTimeout(() => {
+        secretTrip.style.display = 'block';
+    }, 3000);
+
+    // Handle posting announcement
+    const postButton = managerConsole.querySelector('button');
+    postButton.addEventListener('click', () => {
+        const titleInput = managerConsole.querySelector('input[type="text"]');
+        const announcementTextarea = managerConsole.querySelector('textarea');
+
+        const title = titleInput.value;
+        const announcement = announcementTextarea.value;
+
+        // Create the announcement element
+        const announcementDiv = document.createElement('div');
+        announcementDiv.classList.add('announcement');
+        announcementDiv.innerHTML = `
+            <h3>${title}</h3>
+            <p>${announcement}</p>
+        `;
+
+        // Append the announcement to the container
+        announcementsContainer.appendChild(announcementDiv);
+
+        // Clear the input fields
+        titleInput.value = '';
+        announcementTextarea.value = '';
+    });
+
+</script>
+
+</body>
+</html>

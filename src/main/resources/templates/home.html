@@ -245,6 +245,7 @@
 
 
 
+
     </style>
 </head>
 
@@ -266,6 +267,16 @@
         <br><br>
         Role(s):<span style="font-weight: bold sec" sec:authentication="principal.authorities"></span>
     </p>
+    <p>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+        (Only for Manager peeps)
+    </p>
+    <!-- Add a link to point to /systems ... this is for the admins -->
+    <p>
+        <a th:href="@{/systems}">IT Systems Meeting</a>
+        (Only for Admin peeps)
+    </p>
+
     <img src="https://www.euttaranchal.com/tourism/photos/makkumath-8948432.jpg" alt="Makkumath Image"
          class="instagram-image" style="display: block; margin: 0 auto;">
     <p style="color: #333; font-size: 16px; text-align: center;">For more information, visit the <a

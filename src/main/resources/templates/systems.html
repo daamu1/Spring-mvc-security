@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        header {
+            background-color: #405de6;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #405de6;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .activity-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .activity-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .activity-list li:last-child {
+            margin-bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>Admin Page</h2>
+</header>
+
+<main>
+    <h3 style="color: #405de6;">Welcome, Admin!</h3>
+    <p>
+        Manage and monitor activities here. Keep the platform secure and engaging.
+        <br>
+        Make sure to handle user reports and review flagged content promptly.
+    </p>
+
+    <hr>
+
+    <h4 style="color: #405de6;">Recent Activities</h4>
+    <ul class="activity-list">
+        <li>User @{john_doe} posted a new photo</li>
+        <li>User @{jane_smith} commented on a post</li>
+        <li>User @{mark_johnson} reported a violation</li>
+    </ul>
+
+    <hr>
+
+    <a class="back-link" href="/">Back to Home Page</a>
+</main>
+
+</body>
+</html>

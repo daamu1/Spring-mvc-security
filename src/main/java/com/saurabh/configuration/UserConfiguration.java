@@ -14,11 +14,23 @@ public class UserConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
 
-        UserDetails saurabh = User.builder().username("saurabh").password("{noop}test123").roles("EMPLOYEE").build();
+        UserDetails saurabh = User.builder()
+                .username("saurabh")
+                .password("{noop}test123")
+                .roles("EMPLOYEE")
+                .build();
 
-        UserDetails amit = User.builder().username("amit").password("{noop}test123").roles("EMPLOYEE", "MANAGER").build();
+        UserDetails amit = User.builder()
+                .username("amit")
+                .password("{noop}test123")
+                .roles("EMPLOYEE", "MANAGER")
+                .build();
 
-        UserDetails shubham = User.builder().username("shubham").password("{noop}test123").roles("EMPLOYEE", "MANAGER", "ADMIN").build();
+        UserDetails shubham = User.builder()
+                .username("shubham")
+                .password("{noop}test123")
+                .roles("EMPLOYEE", "MANAGER", "ADMIN")
+                .build();
 
         return new InMemoryUserDetailsManager(shubham, amit, saurabh);
     }
@@ -26,7 +38,21 @@ public class UserConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(configurer -> configurer.anyRequest().authenticated()).formLogin(form -> form.loginPage("/showMyLoginPage").loginProcessingUrl("/authenticateTheUser").permitAll()).logout(logout -> logout.permitAll());
+        http.authorizeHttpRequests(configurer ->
+                        configurer
+                                .requestMatchers("/").hasRole("EMPLOYEE")
+                                .requestMatchers("/leaders/**").hasRole("MANAGER")
+                                .requestMatchers("/systems/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                )
+                .formLogin(form ->
+                        form
+                                .loginPage("/showMyLoginPage")
+                                .loginProcessingUrl("/authenticateTheUser")
+                                .permitAll()
+                )
+                .logout(logout -> logout.permitAll()
+                );
 
         return http.build();
     }
